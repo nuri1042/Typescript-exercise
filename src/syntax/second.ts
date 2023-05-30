@@ -157,3 +157,29 @@ const promises = await Promise.allSettled([
   Promise.resolve("b"),
 ]);
 const errors = promises.filter(isRejected);
+
+//
+// 자주 사용되는 문법들
+
+// 1. readonly
+interface newAA {
+  readonly a: string;
+  b: string;
+}
+const newaa: newAA = { a: "hello", b: "world" };
+newaa.a = "233"; // error
+
+// 2. indexed signature
+// 속성 값들이 전부다 하나의 타입이길 원할 떄
+type newBB = { [key: string]: number }; // 만약 어떤 key이던간에 전부 문자열이고 그 값은 숫자이길 원할 때
+const newbb: newBB = { a: 2, b: 42, c: 5 };
+
+//3. mapped types
+// pipe( | ) 는 interface 에서는 사용 불가
+type newDD = "Human" | "Mammal" | "Animal"; // key가 이 중 하나이길 원할 때
+type newCC = { [key in newDD]: number };
+type newEE = { [key in newDD]: newDD };
+
+const aaaa: newCC = { Human: 2, Animal: 42, Mammal: 5 };
+const bbbb: newEE = { Human: "Animal", Animal: "Mammal", Mammal: "Human" };
+const cccc: Partial<newCC> = { Human: 2 }; // Partial type : 특정 타입을 전부 사용하지 않아도 부분집합을 만족하는 타입을 정의하는 것
