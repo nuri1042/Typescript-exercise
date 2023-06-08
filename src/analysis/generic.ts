@@ -1,4 +1,4 @@
-// Generic 분석
+// Generic 타입분석
 
 // 1. forEach
 interface Array<T> {
